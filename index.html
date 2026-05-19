@@ -999,6 +999,139 @@
       .slaughter-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ═══════════ DU'A & REFLECTIONS ═══════════ */
+    .duas-section, .reflections-section {
+      margin-bottom: 50px;
+    }
+
+    .dua-input-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dua-input-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .dua-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .dua-input {
+      flex: 1;
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      background: var(--white);
+      resize: none;
+      min-height: 42px;
+      line-height: 1.5;
+      transition: border-color 0.2s ease;
+    }
+
+    .dua-input:focus {
+      outline: none;
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+    }
+
+    .dua-input::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .add-dua-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      border: 1.5px dashed var(--cream-dark);
+      border-radius: var(--radius-sm);
+      background: none;
+      color: var(--text-light);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .add-dua-btn:hover {
+      border-color: var(--gold-light);
+      color: var(--gold);
+      background: rgba(201,168,76,0.03);
+    }
+
+    .reflection-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid rgba(201,168,76,0.12);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .reflection-textarea {
+      width: 100%;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: transparent;
+      resize: none;
+      min-height: 180px;
+      line-height: 1.8;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        var(--cream-dark) 27px,
+        var(--cream-dark) 28px
+      );
+      background-attachment: local;
+    }
+
+    .reflection-textarea:focus {
+      outline: none;
+    }
+
+    .reflection-textarea::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .saved-indicator {
+      font-size: 0.72rem;
+      color: var(--sage);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    .saved-indicator.show {
+      opacity: 1;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1278,6 +1411,31 @@
           <div class="slaughter-item">Sinful Desires</div>
         </div>
       </div>
+    </div>
+
+    <!-- ═══════════ MY DU'A LIST ═══════════ -->
+    <div class="duas-section">
+      <div class="section-title">
+        <h2>My Du'a List</h2>
+        <p>Write your personal du'as — bring these to Arafah</p>
+      </div>
+
+      <div id="duaList" class="dua-input-list"></div>
+      <button class="add-dua-btn" onclick="addDua()">+ Add another du'a</button>
+      <div class="saved-indicator" id="duaSaved">Saved</div>
+    </div>
+
+    <!-- ═══════════ NOTES & REFLECTIONS ═══════════ -->
+    <div class="reflections-section">
+      <div class="section-title">
+        <h2>Notes &amp; Reflections</h2>
+        <p>Write anything on your heart during these blessed days</p>
+      </div>
+
+      <div class="reflection-card">
+        <textarea class="reflection-textarea" id="reflectionsText" placeholder="What are you feeling? What did you learn today? What are you grateful for?" oninput="saveReflections()"></textarea>
+      </div>
+      <div class="saved-indicator" id="reflectionsSaved">Saved</div>
     </div>
 
   </div>
@@ -1732,6 +1890,76 @@
 
     renderCounter('dhikr1');
     renderCounter('dhikr2');
+
+    // ═══════════ DU'A LIST ═══════════
+    const DUA_KEY = 'dhulhijjah_duas_2026';
+    const REFLECT_KEY = 'dhulhijjah_reflections_2026';
+
+    function loadDuas() {
+      try {
+        const saved = localStorage.getItem(DUA_KEY);
+        return saved ? JSON.parse(saved) : ['', '', '', '', ''];
+      } catch { return ['', '', '', '', '']; }
+    }
+
+    function saveDuas() {
+      const inputs = document.querySelectorAll('.dua-input');
+      const duas = [];
+      inputs.forEach(inp => duas.push(inp.value));
+      try { localStorage.setItem(DUA_KEY, JSON.stringify(duas)); } catch {}
+      flashSaved('duaSaved');
+    }
+
+    function renderDuas() {
+      const duas = loadDuas();
+      const container = document.getElementById('duaList');
+      let html = '';
+      duas.forEach((text, i) => {
+        html += `<div class="dua-input-row">`;
+        html += `<div class="dua-num">${i + 1}</div>`;
+        html += `<textarea class="dua-input" rows="1" placeholder="Write your du'a here..." oninput="autoGrow(this); saveDuas()">${text}</textarea>`;
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+      document.querySelectorAll('.dua-input').forEach(el => autoGrow(el));
+    }
+
+    function addDua() {
+      const duas = loadDuas();
+      duas.push('');
+      try { localStorage.setItem(DUA_KEY, JSON.stringify(duas)); } catch {}
+      renderDuas();
+      const inputs = document.querySelectorAll('.dua-input');
+      if (inputs.length) inputs[inputs.length - 1].focus();
+    }
+
+    function autoGrow(el) {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    }
+
+    function flashSaved(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('show');
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => el.classList.remove('show'), 1500);
+    }
+
+    renderDuas();
+
+    // ═══════════ REFLECTIONS ═══════════
+    function loadReflections() {
+      try { return localStorage.getItem(REFLECT_KEY) || ''; } catch { return ''; }
+    }
+
+    function saveReflections() {
+      const text = document.getElementById('reflectionsText').value;
+      try { localStorage.setItem(REFLECT_KEY, text); } catch {}
+      flashSaved('reflectionsSaved');
+    }
+
+    document.getElementById('reflectionsText').value = loadReflections();
   </script>
 </body>
 </html>

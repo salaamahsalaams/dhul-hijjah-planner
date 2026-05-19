@@ -641,42 +641,63 @@
     }
 
     .dua-lines {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2mm 5mm;
+      display: flex;
+      flex-direction: column;
     }
 
     .dua-line {
       display: flex;
-      align-items: center;
-      gap: 2mm;
-      padding: 1.5mm 0;
+      align-items: flex-end;
+      gap: 3mm;
+      padding: 0;
       border-bottom: 0.5px solid var(--cream-dark);
-      min-height: 8mm;
+      min-height: 12mm;
     }
 
     .dua-line-num {
       font-size: 0.65rem;
       color: var(--text-light);
-      width: 14px;
+      width: 16px;
       flex-shrink: 0;
       text-align: center;
+      padding-bottom: 1.5mm;
     }
 
     /* ═══════════ PRINT STYLES ═══════════ */
     @media print {
       body {
         padding: 0;
+        max-width: none;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
       .no-print { display: none !important; }
 
+      .page-wrapper {
+        background: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
       .cover {
         min-height: auto;
         height: 100vh;
       }
+
+      .day-card { page-break-inside: avoid; }
+      .dhikr-card { page-break-inside: avoid; }
+      .slaughter { page-break-inside: avoid; }
+      .reminder { page-break-inside: avoid; }
+
+      .planner-page { page-break-before: always; }
+      .dhikr-page { page-break-before: always; }
+      .notes-section { page-break-before: always; }
+
+      .section-header { page-break-after: avoid; }
+      .legend { page-break-after: avoid; }
     }
 
     /* ═══════════ SCREEN STYLES ═══════════ */
@@ -1144,24 +1165,24 @@
 
     <div class="dua-lines">
       <div class="dua-line"><span class="dua-line-num">1</span></div>
-      <div class="dua-line"><span class="dua-line-num">11</span></div>
       <div class="dua-line"><span class="dua-line-num">2</span></div>
-      <div class="dua-line"><span class="dua-line-num">12</span></div>
       <div class="dua-line"><span class="dua-line-num">3</span></div>
-      <div class="dua-line"><span class="dua-line-num">13</span></div>
       <div class="dua-line"><span class="dua-line-num">4</span></div>
-      <div class="dua-line"><span class="dua-line-num">14</span></div>
       <div class="dua-line"><span class="dua-line-num">5</span></div>
-      <div class="dua-line"><span class="dua-line-num">15</span></div>
       <div class="dua-line"><span class="dua-line-num">6</span></div>
-      <div class="dua-line"><span class="dua-line-num">16</span></div>
       <div class="dua-line"><span class="dua-line-num">7</span></div>
-      <div class="dua-line"><span class="dua-line-num">17</span></div>
       <div class="dua-line"><span class="dua-line-num">8</span></div>
-      <div class="dua-line"><span class="dua-line-num">18</span></div>
       <div class="dua-line"><span class="dua-line-num">9</span></div>
-      <div class="dua-line"><span class="dua-line-num">19</span></div>
       <div class="dua-line"><span class="dua-line-num">10</span></div>
+      <div class="dua-line"><span class="dua-line-num">11</span></div>
+      <div class="dua-line"><span class="dua-line-num">12</span></div>
+      <div class="dua-line"><span class="dua-line-num">13</span></div>
+      <div class="dua-line"><span class="dua-line-num">14</span></div>
+      <div class="dua-line"><span class="dua-line-num">15</span></div>
+      <div class="dua-line"><span class="dua-line-num">16</span></div>
+      <div class="dua-line"><span class="dua-line-num">17</span></div>
+      <div class="dua-line"><span class="dua-line-num">18</span></div>
+      <div class="dua-line"><span class="dua-line-num">19</span></div>
       <div class="dua-line"><span class="dua-line-num">20</span></div>
     </div>
 
