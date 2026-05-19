@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dhul Hijjah Planner — Best 10 Days of the Year</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A0;
+      --gold-glow: #F5E6B8;
+      --cream: #FFF9F0;
+      --cream-dark: #F5EDE0;
+      --sage: #7A8B6F;
+      --sage-light: #A8B89E;
+      --teal: #5B8A8A;
+      --teal-light: #8BB8B8;
+      --rose: #C4848A;
+      --rose-light: #E4B4B8;
+      --plum: #6B4C6E;
+      --text-dark: #2D2520;
+      --text-medium: #5C514A;
+      --text-light: #8A7F78;
+      --white: #FFFFFF;
+      --shadow-soft: 0 2px 20px rgba(45, 37, 32, 0.06);
+      --shadow-card: 0 4px 30px rgba(45, 37, 32, 0.08);
+      --shadow-hover: 0 8px 40px rgba(201, 168, 76, 0.15);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .arabic-font { font-family: 'Amiri', serif; }
+
+    /* Geometric pattern background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(201,168,76,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(91,138,138,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(196,132,138,0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      position: relative;
+    }
+
+    .hero-ornament {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 20px;
+    }
+
+    .hero .bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--gold), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-medium);
+      font-weight: 300;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero-hadith {
+      margin-top: 28px;
+      padding: 20px 28px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(91,138,138,0.06));
+      border: 1px solid var(--gold-light);
+      border-radius: var(--radius);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-hadith p {
+      font-family: 'Amiri', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-medium);
+      line-height: 1.7;
+    }
+
+    .hero-hadith .source {
+      font-family: 'Outfit', sans-serif;
+      font-style: normal;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ═══════════ PROGRESS BAR ═══════════ */
+    .progress-section {
+      margin: 10px auto 40px;
+      max-width: 640px;
+      text-align: center;
+    }
+
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: var(--cream-dark);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      border-radius: 100px;
+      transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 0%;
+    }
+
+    .progress-stars {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding: 0 2px;
+    }
+
+    .progress-stars span {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      font-weight: 500;
+      width: 20px;
+      text-align: center;
+    }
+
+    .progress-stars span.completed {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ═══════════ 6 REMINDERS GRID ═══════════ */
+    .section-title {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-title h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .section-title p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .reminders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 50px;
+    }
+
+    .reminder-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid rgba(201,168,76,0.12);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .reminder-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .reminder-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .reminder-card:nth-child(1)::before { background: linear-gradient(90deg, var(--rose), var(--rose-light)); }
+    .reminder-card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+    .reminder-card:nth-child(3)::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .reminder-card:nth-child(4)::before { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+    .reminder-card:nth-child(5)::before { background: linear-gradient(90deg, var(--plum), #9B7C9E); }
+    .reminder-card:nth-child(6)::before { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+
+    .reminder-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .reminder-card:nth-child(1) .reminder-number { background: rgba(196,132,138,0.12); color: var(--rose); }
+    .reminder-card:nth-child(2) .reminder-number { background: rgba(91,138,138,0.12); color: var(--teal); }
+    .reminder-card:nth-child(3) .reminder-number { background: rgba(201,168,76,0.12); color: var(--gold); }
+    .reminder-card:nth-child(4) .reminder-number { background: rgba(122,139,111,0.12); color: var(--sage); }
+    .reminder-card:nth-child(5) .reminder-number { background: rgba(107,76,110,0.12); color: var(--plum); }
+    .reminder-card:nth-child(6) .reminder-number { background: rgba(91,138,138,0.12); color: var(--teal); }
+
+    .reminder-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .reminder-card .desc {
+      font-size: 0.88rem;
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    .reminder-card .detail-list {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 0.84rem;
+    }
+
+    .reminder-card .detail-list li {
+      padding: 3px 0;
+      color: var(--text-medium);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .reminder-card .detail-list li::before {
+      content: '·';
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════ PRAYERS / ADHKAR SECTION ═══════════ */
+    .prayers-section {
+      margin-bottom: 50px;
+    }
+
+    .prayer-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      border: 1px solid rgba(201,168,76,0.15);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prayer-card::after {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .prayer-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .prayer-label.dhikr { background: rgba(201,168,76,0.1); color: var(--gold); }
+    .prayer-label.dua { background: rgba(91,138,138,0.1); color: var(--teal); }
+
+    .prayer-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.6rem;
+      line-height: 2;
+      color: var(--text-dark);
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .prayer-transliteration {
+      font-size: 0.92rem;
+      color: var(--text-medium);
+      font-style: italic;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .prayer-translation {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .prayer-instruction {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(201,168,76,0.05);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    .prayer-instruction svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+    }
+
+    .rewards-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .reward-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(122,139,111,0.04));
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      color: var(--text-medium);
+    }
+
+    .reward-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .reward-icon svg {
+      width: 12px;
+      height: 12px;
+      color: var(--gold);
+    }
+
+    .hadith-ref {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(201,168,76,0.15);
+    }
+
+    /* ═══════════ AUDIO PLAYER ═══════════ */
+    .dhikr-audio {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(91,138,138,0.06);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(91,138,138,0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dhikr-audio:hover {
+      background: rgba(91,138,138,0.1);
+      border-color: rgba(91,138,138,0.2);
+    }
+
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: var(--teal);
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      background: #4A7979;
+      transform: scale(1.08);
+    }
+
+    .play-btn:active { transform: scale(0.95); }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      margin-left: 2px;
+    }
+
+    .audio-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .audio-label {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .audio-source {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 1px;
+    }
+
+    /* ═══════════ DHIKR COUNTER ═══════════ */
+    .dhikr-counter {
+      margin-top: 16px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(91,138,138,0.04));
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .counter-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .counter-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .counter-reset {
+      background: none;
+      border: 1px solid var(--cream-dark);
+      border-radius: 100px;
+      padding: 3px 10px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .counter-reset:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    .counter-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .counter-minus,
+    .counter-plus {
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+    }
+
+    .counter-minus {
+      width: 36px;
+      height: 36px;
+      background: var(--cream-dark);
+      color: var(--text-light);
+      font-size: 1.3rem;
+    }
+
+    .counter-minus:hover {
+      background: rgba(196,132,138,0.15);
+      color: var(--rose);
+    }
+
+    .counter-plus {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--gold), #D4B85C);
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 15px rgba(201,168,76,0.3);
+    }
+
+    .counter-plus:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+    }
+
+    .counter-plus:active {
+      transform: scale(0.95);
+    }
+
+    .counter-display {
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .counter-number {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .counter-of {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .counter-progress {
+      margin-top: 12px;
+      height: 6px;
+      background: var(--cream-dark);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .counter-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      border-radius: 100px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .counter-complete .counter-number {
+      color: var(--gold);
+    }
+
+    .counter-complete .counter-progress-fill {
+      background: linear-gradient(90deg, var(--gold), #D4B85C);
+    }
+
+    .counter-done-msg {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .counter-complete .counter-done-msg {
+      opacity: 1;
+    }
+
+    /* ═══════════ 10-DAY PLANNER ═══════════ */
+    .planner-section {
+      margin-bottom: 50px;
+    }
+
+    .day-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+      border: 1px solid rgba(201,168,76,0.1);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .day-card:hover {
+      box-shadow: var(--shadow-card);
+    }
+
+    .day-card.special {
+      border-color: rgba(201,168,76,0.3);
+      background: linear-gradient(135deg, var(--white) 0%, rgba(201,168,76,0.03) 100%);
+    }
+
+    .day-card.eid {
+      border-color: rgba(91,138,138,0.3);
+      background: linear-gradient(135deg, var(--white) 0%, rgba(91,138,138,0.03) 100%);
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .day-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: var(--cream-dark);
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+
+    .day-card.special .day-badge {
+      background: linear-gradient(135deg, var(--gold), #D4B85C);
+      color: white;
+    }
+
+    .day-card.eid .day-badge {
+      background: linear-gradient(135deg, var(--teal), #6B9A9A);
+      color: white;
+    }
+
+    .day-header-text {
+      flex: 1;
+    }
+
+    .day-header-text h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .day-header-text .day-hint {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .day-check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .day-check:hover {
+      border-color: var(--gold);
+    }
+
+    .day-check.checked {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .day-check svg {
+      width: 14px;
+      height: 14px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .day-check.checked svg {
+      opacity: 1;
+    }
+
+    .day-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .day-body.open {
+      max-height: 800px;
+    }
+
+    .day-body-inner {
+      padding: 0 20px 18px;
+      border-top: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .todo-list {
+      list-style: none;
+      padding-top: 14px;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+    }
+
+    .todo-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .todo-checkbox:hover {
+      border-color: var(--sage);
+    }
+
+    .todo-checkbox.checked {
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    .todo-checkbox svg {
+      width: 12px;
+      height: 12px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .todo-checkbox.checked svg {
+      opacity: 1;
+    }
+
+    .todo-checkbox.excused {
+      background: var(--rose);
+      border-color: var(--rose);
+    }
+
+    .todo-checkbox.excused svg {
+      opacity: 1;
+    }
+
+    .todo-text.excused-text {
+      text-decoration: line-through;
+      color: var(--text-light);
+    }
+
+    .todo-text .excused-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      background: rgba(196,132,138,0.12);
+      color: var(--rose);
+      padding: 1px 7px;
+      border-radius: 100px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.02em;
+    }
+
+    .planner-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding: 10px 16px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-medium);
+    }
+
+    .legend-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .legend-swatch.done {
+      background: var(--sage);
+    }
+
+    .legend-swatch.excused {
+      background: var(--rose);
+    }
+
+    .legend-swatch svg {
+      width: 10px;
+      height: 10px;
+      color: white;
+    }
+
+    .todo-text {
+      font-size: 0.88rem;
+      color: var(--text-medium);
+      line-height: 1.5;
+    }
+
+    .todo-text.crossed {
+      text-decoration: line-through;
+      color: var(--text-light);
+    }
+
+    .special-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-arafah { background: rgba(201,168,76,0.12); color: var(--gold); }
+    .tag-eid { background: rgba(91,138,138,0.12); color: var(--teal); }
+
+    .day-note {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(201,168,76,0.04);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--gold-light);
+    }
+
+    .day-note p {
+      font-family: 'Amiri', serif;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    /* ═══════════ SLAUGHTER SECTION ═══════════ */
+    .slaughter-section {
+      margin-bottom: 50px;
+    }
+
+    .slaughter-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      border: 1px solid rgba(196,132,138,0.2);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    .slaughter-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .slaughter-card .sub {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .slaughter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .slaughter-item {
+      padding: 14px 10px;
+      background: rgba(196,132,138,0.05);
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      color: var(--text-medium);
+      font-weight: 500;
+      border: 1px solid rgba(196,132,138,0.08);
+    }
+
+    /* ═══════════ FOOTER ═══════════ */
+    footer {
+      text-align: center;
+      padding: 30px 20px 50px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    footer .dua {
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      color: var(--text-medium);
+      margin-bottom: 6px;
+    }
+
+    footer .small {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 30px; }
+      .hero .bismillah { font-size: 1.6rem; }
+      .reminders-grid { grid-template-columns: 1fr; }
+      .prayer-arabic { font-size: 1.3rem; }
+      .prayer-card { padding: 22px; }
+      .slaughter-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ═══════════ DU'A & REFLECTIONS ═══════════ */
+    .duas-section, .reflections-section {
+      margin-bottom: 50px;
+    }
+
+    .dua-input-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dua-input-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .dua-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .dua-input {
+      flex: 1;
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      background: var(--white);
+      resize: none;
+      min-height: 42px;
+      line-height: 1.5;
+      transition: border-color 0.2s ease;
+    }
+
+    .dua-input:focus {
+      outline: none;
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+    }
+
+    .dua-input::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .add-dua-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      border: 1.5px dashed var(--cream-dark);
+      border-radius: var(--radius-sm);
+      background: none;
+      color: var(--text-light);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .add-dua-btn:hover {
+      border-color: var(--gold-light);
+      color: var(--gold);
+      background: rgba(201,168,76,0.03);
+    }
+
+    .reflection-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid rgba(201,168,76,0.12);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .reflection-textarea {
+      width: 100%;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: transparent;
+      resize: none;
+      min-height: 180px;
+      line-height: 1.8;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        var(--cream-dark) 27px,
+        var(--cream-dark) 28px
+      );
+      background-attachment: local;
+    }
+
+    .reflection-textarea:focus {
+      outline: none;
+    }
+
+    .reflection-textarea::placeholder {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .saved-indicator {
+      font-size: 0.72rem;
+      color: var(--sage);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    .saved-indicator.show {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <div class="hero-ornament"></div>
+    <p class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</p>
+    <h1>My <span>Dhul Hijjah</span> Planner</h1>
+    <p class="subtitle">The best 10 days of the entire year — make every moment count</p>
+
+    <div class="hero-hadith">
+      <p>"There are no days during which good deeds are more beloved to Allah than these first 10 days of Dhul Hijjah."</p>
+      <span class="source">— Prophet Muhammad ﷺ</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══════════ PROGRESS ═══════════ -->
+    <div class="progress-section">
+      <div class="progress-label">Your 10-Day Journey</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-stars" id="progressStars"></div>
+    </div>
+
+    <!-- ═══════════ 6 REMINDERS ═══════════ -->
+    <div class="section-title">
+      <h2>6 Essential Reminders</h2>
+      <p>Your guide to making the most of these blessed days</p>
+    </div>
+
+    <div class="reminders-grid">
+      <div class="reminder-card">
+        <div class="reminder-number">1</div>
+        <h3>Avoid Sins</h3>
+        <p class="desc">As much as good deeds are more rewarded, sins are more despised by Allah during these days. If you commit sins, you will be deprived of His mercy.</p>
+        <ul class="detail-list">
+          <li>Protect your eyes, ears, tongue, hands, and heart</li>
+          <li>Do not listen to the whispers of Shaytan</li>
+        </ul>
+      </div>
+
+      <div class="reminder-card">
+        <div class="reminder-number">2</div>
+        <h3>Obligatory Worship</h3>
+        <p class="desc">Establish your obligatory acts of worship — they are the foundation upon which everything else is built.</p>
+        <ul class="detail-list">
+          <li>Pray five times a day on time</li>
+          <li>Guard your salah with khushu'</li>
+        </ul>
+      </div>
+
+      <div class="reminder-card">
+        <div class="reminder-number">3</div>
+        <h3>Fasting</h3>
+        <p class="desc">Fasting is highly recommended during these days. Fast especially on the Day of Arafah (9th Dhul Hijjah) and as many of the first 8 days as you can.</p>
+        <ul class="detail-list">
+          <li>Day of Arafah fasting expiates the sins of the year before and the year after</li>
+          <li>No day when Allah frees more people from Hellfire than Arafah</li>
+        </ul>
+      </div>
+
+      <div class="reminder-card">
+        <div class="reminder-number">4</div>
+        <h3>Du'a &amp; Dhikr</h3>
+        <p class="desc">Not a single moment should pass by when you're not remembering Allah. Wake up for tahajjud and spend long hours communicating with Him.</p>
+        <ul class="detail-list">
+          <li>There is no du'a better than the du'a made on Arafah</li>
+          <li>The Prophet ﷺ and his companions would increase their dhikr</li>
+        </ul>
+      </div>
+
+      <div class="reminder-card">
+        <div class="reminder-number">5</div>
+        <h3>Sacrifice</h3>
+        <p class="desc">If you make your intention to sacrifice, be mindful of not trimming your hair or nails as soon as Dhul Hijjah starts until your sacrifice has been performed.</p>
+        <ul class="detail-list">
+          <li>No hair trimming from 1st Dhul Hijjah</li>
+          <li>No nail clipping until sacrifice is done</li>
+        </ul>
+      </div>
+
+      <div class="reminder-card">
+        <div class="reminder-number">6</div>
+        <h3>Lock In</h3>
+        <p class="desc">It's time to finish off this year becoming the best version of ourselves as Muslims. An animal is not enough.</p>
+        <ul class="detail-list">
+          <li>Slaughter your ego, anger, corruption, lies, bad behavior, and sinful desires</li>
+          <li>Minimize social media &amp; distractions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══════════ PRAYERS & ADHKAR ═══════════ -->
+    <div class="prayers-section">
+      <div class="section-title">
+        <h2>Daily Adhkar &amp; Prayers</h2>
+        <p>Recite these every single day of Dhul Hijjah</p>
+      </div>
+
+      <!-- Dhikr 1 -->
+      <div class="prayer-card">
+        <div class="prayer-label dhikr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          Dhikr 1
+        </div>
+        <div class="prayer-arabic">
+          سُبْحَانَ اللّٰهِ وَالْحَمْدُ لِلّٰهِ وَلَا إِلٰهَ إِلَّا اللّٰهُ وَاللّٰهُ أَكْبَرُ
+        </div>
+        <p class="prayer-transliteration">
+          Subhan-Allahi wal-Hamdulillahi wa La ilaha ill-Allahu wa Allahu Akbar
+        </p>
+        <p class="prayer-translation">
+          Glory be to Allah, all praise is due to Allah, there is no god but Allah, and Allah is the Greatest.
+        </p>
+        <div class="prayer-instruction">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+          Say 100 times daily
+        </div>
+
+        <div class="dhikr-audio" onclick="playAudio('dhikr1')">
+          <button class="play-btn" id="playBtn1" aria-label="Play recitation">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          </button>
+          <div class="audio-info">
+            <div class="audio-label">Listen to recitation</div>
+            <div class="audio-source">Tap to play / pause</div>
+          </div>
+        </div>
+        <audio id="audio-dhikr1" preload="none" src="https://archive.org/download/SubhanallahWalhamdulillah/Subhanallah%20Walhamdulillah.mp3"></audio>
+
+        <div class="dhikr-counter" id="counter1">
+          <div class="counter-header">
+            <span class="counter-title">Track your count</span>
+            <button class="counter-reset" onclick="resetCounter('dhikr1')">Reset</button>
+          </div>
+          <div class="counter-body">
+            <button class="counter-minus" onclick="updateCounter('dhikr1', -1)" aria-label="Decrease count">&minus;</button>
+            <div class="counter-display">
+              <div class="counter-number" id="count-dhikr1">0</div>
+              <div class="counter-of">of 100</div>
+            </div>
+            <button class="counter-plus" onclick="updateCounter('dhikr1', 1)" aria-label="Increase count">+</button>
+          </div>
+          <div class="counter-progress">
+            <div class="counter-progress-fill" id="progress-dhikr1"></div>
+          </div>
+          <div class="counter-done-msg">Ma sha Allah! Completed!</div>
+        </div>
+
+        <div class="hadith-ref">
+          <strong>Riyadh as-Salihin 1409</strong> — Abu Hurairah (RA) reported: The Messenger of Allah ﷺ said, "The uttering of these words is dearer to me than anything over which the sun rises." [Muslim]
+        </div>
+      </div>
+
+      <!-- Dhikr 2 -->
+      <div class="prayer-card">
+        <div class="prayer-label dhikr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          Dhikr 2
+        </div>
+        <div class="prayer-arabic">
+          لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+        </div>
+        <p class="prayer-transliteration">
+          La ilaha ill-Allahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir
+        </p>
+        <p class="prayer-translation">
+          There is no god but Allah alone, He has no partner, to Him belongs the dominion and to Him belongs all praise, and He is capable over all things.
+        </p>
+        <div class="prayer-instruction">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+          Say 100+ times daily
+        </div>
+
+        <div class="dhikr-audio" onclick="playAudio('dhikr2')">
+          <button class="play-btn" id="playBtn2" aria-label="Play recitation">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          </button>
+          <div class="audio-info">
+            <div class="audio-label">Listen to recitation</div>
+            <div class="audio-source">Tap to play / pause</div>
+          </div>
+        </div>
+        <audio id="audio-dhikr2" preload="none" src="https://archive.org/download/la-ilaha-illallah-wahdahu-la-sharika-lahu-lahul-mulku-walahul-hamdu/La%20ilaha%20illallah%20Wahdahu%20LaSharikaLahu%20Lahul%20Mulku%20Walahul%20Hamdu.mp4"></audio>
+
+        <div class="dhikr-counter" id="counter2">
+          <div class="counter-header">
+            <span class="counter-title">Track your count</span>
+            <button class="counter-reset" onclick="resetCounter('dhikr2')">Reset</button>
+          </div>
+          <div class="counter-body">
+            <button class="counter-minus" onclick="updateCounter('dhikr2', -1)" aria-label="Decrease count">&minus;</button>
+            <div class="counter-display">
+              <div class="counter-number" id="count-dhikr2">0</div>
+              <div class="counter-of">of 100</div>
+            </div>
+            <button class="counter-plus" onclick="updateCounter('dhikr2', 1)" aria-label="Increase count">+</button>
+          </div>
+          <div class="counter-progress">
+            <div class="counter-progress-fill" id="progress-dhikr2"></div>
+          </div>
+          <div class="counter-done-msg">Ma sha Allah! Completed!</div>
+        </div>
+
+        <div class="rewards-list">
+          <div class="reward-item">
+            <div class="reward-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            Freeing 10 slaves
+          </div>
+          <div class="reward-item">
+            <div class="reward-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            100 good deeds recorded
+          </div>
+          <div class="reward-item">
+            <div class="reward-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            100 sins removed
+          </div>
+          <div class="reward-item">
+            <div class="reward-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            Protection from the devil till evening
+          </div>
+          <div class="reward-item">
+            <div class="reward-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            No one will exceed him in doing good
+          </div>
+        </div>
+
+        <div class="hadith-ref">
+          <strong>Riyadh as-Salihin 1410</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ 10-DAY PLANNER ═══════════ -->
+    <div class="planner-section">
+      <div class="section-title">
+        <h2>Day-by-Day Planner</h2>
+        <p>Tap each day to expand your checklist — your progress is saved automatically</p>
+      </div>
+
+      <div class="planner-legend">
+        <div class="legend-item">
+          <div class="legend-swatch done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Completed
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch excused"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+          Intention made — excused
+        </div>
+        <div class="legend-item" style="font-size:0.72rem; color:var(--text-light);">Tap once = done · Tap twice = excused</div>
+      </div>
+      <div id="plannerDays"></div>
+    </div>
+
+    <!-- ═══════════ SLAUGHTER YOUR... ═══════════ -->
+    <div class="slaughter-section">
+      <div class="slaughter-card">
+        <h3>An Animal Is Not Enough</h3>
+        <p class="sub">Also slaughter these this Dhul Hijjah</p>
+        <div class="slaughter-grid">
+          <div class="slaughter-item">Your Ego</div>
+          <div class="slaughter-item">Your Anger</div>
+          <div class="slaughter-item">Your Corruption</div>
+          <div class="slaughter-item">Your Lies</div>
+          <div class="slaughter-item">Bad Behavior</div>
+          <div class="slaughter-item">Filthy Tongue</div>
+          <div class="slaughter-item">Sinful Desires</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ MY DU'A LIST ═══════════ -->
+    <div class="duas-section">
+      <div class="section-title">
+        <h2>My Du'a List</h2>
+        <p>Write your personal du'as — bring these to Arafah</p>
+      </div>
+
+      <div id="duaList" class="dua-input-list"></div>
+      <button class="add-dua-btn" onclick="addDua()">+ Add another du'a</button>
+      <div class="saved-indicator" id="duaSaved">Saved</div>
+    </div>
+
+    <!-- ═══════════ NOTES & REFLECTIONS ═══════════ -->
+    <div class="reflections-section">
+      <div class="section-title">
+        <h2>Notes &amp; Reflections</h2>
+        <p>Write anything on your heart during these blessed days</p>
+      </div>
+
+      <div class="reflection-card">
+        <textarea class="reflection-textarea" id="reflectionsText" placeholder="What are you feeling? What did you learn today? What are you grateful for?" oninput="saveReflections()"></textarea>
+      </div>
+      <div class="saved-indicator" id="reflectionsSaved">Saved</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <p class="dua">اللهم بلغنا ذي الحجة</p>
+    <p class="small">May Allah allow us to reach Dhul Hijjah and accept our deeds</p>
+  </footer>
+
+  <script>
+    const DAYS_DATA = [
+      {
+        day: 1, title: "Day 1 — A Fresh Start",
+        hint: "Begin with sincerity and intention",
+        special: false,
+        excusable: [1, 2],
+        todos: [
+          "Make your niyyah (intention) for these 10 days",
+          "Pray all 5 salawat on time",
+          "Begin fasting (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Avoid all sins — guard your eyes, ears, tongue",
+          "If intending to sacrifice: stop trimming hair/nails",
+          "Make du'a after every salah"
+        ]
+      },
+      {
+        day: 2, title: "Day 2 — Building Momentum",
+        hint: "Strengthen your connection",
+        special: false,
+        excusable: [0, 1],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Read Quran — even if just one page",
+          "Give charity (sadaqah), even if small",
+          "Make istighfar (seek forgiveness) abundantly",
+          "Avoid social media distractions"
+        ]
+      },
+      {
+        day: 3, title: "Day 3 — Deepening Devotion",
+        hint: "Increase your worship",
+        special: false,
+        excusable: [0, 1, 4],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Wake up for Tahajjud (night prayer)",
+          "Read Quran — increase your portion",
+          "Make a specific du'a list for these days",
+          "Be kind — smile, help someone, forgive"
+        ]
+      },
+      {
+        day: 4, title: "Day 4 — Consistency",
+        hint: "Stay steadfast",
+        special: false,
+        excusable: [0, 1, 4],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Tahajjud — pour your heart out to Allah",
+          "Read Quran with reflection",
+          "Give sadaqah today",
+          "Check in: are you guarding your tongue?"
+        ]
+      },
+      {
+        day: 5, title: "Day 5 — Halfway There",
+        hint: "Don't let up now",
+        special: false,
+        excusable: [0, 1, 4],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Tahajjud — increase your night worship",
+          "Read Quran",
+          "Make du'a for the Ummah",
+          "Remind someone else to increase their worship"
+        ]
+      },
+      {
+        day: 6, title: "Day 6 — Pushing Through",
+        hint: "The best deeds are the most consistent",
+        special: false,
+        excusable: [0, 1, 4, 6],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Tahajjud",
+          "Read Quran",
+          "Extra nawafil (voluntary) prayers",
+          "Reflect on your sins and seek forgiveness"
+        ]
+      },
+      {
+        day: 7, title: "Day 7 — The Final Push Begins",
+        hint: "Three more days — give it your all",
+        special: false,
+        excusable: [0, 1, 4],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Tahajjud — long sujood with du'a",
+          "Read Quran — try to complete more",
+          "Give sadaqah",
+          "Prepare your heart for Arafah"
+        ]
+      },
+      {
+        day: 8, title: "Day 8 — Yawm al-Tarwiyah",
+        hint: "The Day of Quenching — pilgrims head to Mina",
+        special: false,
+        excusable: [0, 1, 4],
+        todos: [
+          "Pray all 5 salawat on time",
+          "Fast today (Sunnah — last day before Arafah)",
+          "Recite Dhikr 1 — Subhanallah... x100",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100",
+          "Tahajjud — prepare spiritually for Arafah",
+          "Read Quran",
+          "Plan your Arafah day — clear your schedule",
+          "Make lots of istighfar"
+        ]
+      },
+      {
+        day: 9, title: "Day 9 — Yawm al-Arafah",
+        hint: "The greatest day of the year",
+        special: true,
+        excusable: [0, 1, 9],
+        note: "Fasting on this day expiates the sins of the year before and the year after. There is no du'a better than the du'a made on Arafah. Allah frees more people from Hellfire on this day than any other.",
+        todos: [
+          "FAST — this is the most important fast of the year",
+          "Pray all 5 salawat on time with deep khushu'",
+          "Recite Dhikr 1 — Subhanallah... x100+",
+          "Recite Dhikr 2 — La ilaha illallah wahdahu... x100+",
+          "Spend LONG hours making du'a — this is the day",
+          "Cry to Allah — beg for forgiveness",
+          "Du'a for yourself, your family, the Ummah",
+          "Read Quran — especially Surah Al-Ikhlas",
+          "Make du'a before iftar — it is not rejected",
+          "Tahajjud the night before — do not miss it"
+        ]
+      },
+      {
+        day: 10, title: "Day 10 — Eid al-Adha",
+        hint: "Celebrate and glorify Allah",
+        special: false,
+        eid: true,
+        excusable: [1],
+        todos: [
+          "Eid Mubarak! Do NOT fast today",
+          "Pray Eid salah",
+          "Recite Takbirat: Allahu Akbar, Allahu Akbar...",
+          "Perform your Qurbani (sacrifice)",
+          "Dress well and celebrate with family",
+          "Give to those in need",
+          "Make du'a of gratitude to Allah",
+          "Continue your dhikr — don't stop now"
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = 'dhulhijjah_planner_2026';
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : {};
+      } catch { return {}; }
+    }
+
+    function saveState(state) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+    }
+
+    function checkSvg() {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    }
+
+    function heartSvg() {
+      return '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+    }
+
+    function todoIsComplete(val) {
+      return val === true || val === 'done' || val === 'excused';
+    }
+
+    function renderPlanner() {
+      const container = document.getElementById('plannerDays');
+      const state = loadState();
+      let html = '';
+
+      DAYS_DATA.forEach(day => {
+        const dayKey = `day${day.day}`;
+        const dayState = state[dayKey] || {};
+        const todosState = dayState.todos || {};
+        const isOpen = dayState.open || false;
+        const dayCompleted = dayState.completed || false;
+        const checkedCount = Object.values(todosState).filter(v => todoIsComplete(v)).length;
+        const totalCount = day.todos.length;
+
+        let cls = 'day-card';
+        if (day.special) cls += ' special';
+        if (day.eid) cls += ' eid';
+
+        html += `<div class="${cls}" data-day="${day.day}">`;
+        html += `<div class="day-header" onclick="toggleDay(${day.day})">`;
+        html += `<div class="day-badge">${day.day}</div>`;
+        html += `<div class="day-header-text">`;
+        html += `<h3>${day.title}`;
+        if (day.special) html += ` <span class="special-tag tag-arafah">ARAFAH</span>`;
+        if (day.eid) html += ` <span class="special-tag tag-eid">EID</span>`;
+        html += `</h3>`;
+        html += `<span class="day-hint">${day.hint} · ${checkedCount}/${totalCount}</span>`;
+        html += `</div>`;
+        html += `<div class="day-check ${dayCompleted ? 'checked' : ''}" onclick="event.stopPropagation(); toggleDayComplete(${day.day})">${checkSvg()}</div>`;
+        html += `</div>`;
+
+        html += `<div class="day-body ${isOpen ? 'open' : ''}">`;
+        html += `<div class="day-body-inner">`;
+
+        if (day.note) {
+          html += `<div class="day-note"><p>${day.note}</p></div>`;
+        }
+
+        const excusableSet = new Set(day.excusable || []);
+        html += `<ul class="todo-list">`;
+        day.todos.forEach((todo, i) => {
+          const todoKey = `t${i}`;
+          const val = todosState[todoKey] || false;
+          const isDone = val === true || val === 'done';
+          const isExcused = val === 'excused';
+          const canExcuse = excusableSet.has(i);
+
+          let cbClass = 'todo-checkbox';
+          if (isDone) cbClass += ' checked';
+          if (isExcused && canExcuse) cbClass += ' excused';
+
+          const icon = (isExcused && canExcuse) ? heartSvg() : checkSvg();
+          const badge = (isExcused && canExcuse) ? '<span class="excused-badge">Intention made</span>' : '';
+          const textClass = (isExcused && canExcuse) ? 'todo-text excused-text' : (isDone ? 'todo-text crossed' : 'todo-text');
+
+          html += `<li class="todo-item">`;
+          html += `<div class="${cbClass}" onclick="toggleTodo(${day.day}, '${todoKey}', ${canExcuse})">${icon}</div>`;
+          html += `<span class="${textClass}">${todo}${badge}</span>`;
+          html += `</li>`;
+        });
+        html += `</ul></div></div></div>`;
+      });
+
+      container.innerHTML = html;
+      updateProgress();
+    }
+
+    function toggleDay(dayNum) {
+      const state = loadState();
+      const dayKey = `day${dayNum}`;
+      if (!state[dayKey]) state[dayKey] = {};
+      state[dayKey].open = !state[dayKey].open;
+      saveState(state);
+      renderPlanner();
+    }
+
+    function toggleTodo(dayNum, todoKey, canExcuse) {
+      const state = loadState();
+      const dayKey = `day${dayNum}`;
+      if (!state[dayKey]) state[dayKey] = {};
+      if (!state[dayKey].todos) state[dayKey].todos = {};
+      const current = state[dayKey].todos[todoKey];
+      if (canExcuse) {
+        if (!current || current === false) {
+          state[dayKey].todos[todoKey] = 'done';
+        } else if (current === true || current === 'done') {
+          state[dayKey].todos[todoKey] = 'excused';
+        } else {
+          state[dayKey].todos[todoKey] = false;
+        }
+      } else {
+        const isDone = current === true || current === 'done';
+        state[dayKey].todos[todoKey] = isDone ? false : 'done';
+      }
+      saveState(state);
+      renderPlanner();
+    }
+
+    function toggleDayComplete(dayNum) {
+      const state = loadState();
+      const dayKey = `day${dayNum}`;
+      if (!state[dayKey]) state[dayKey] = {};
+      state[dayKey].completed = !state[dayKey].completed;
+      saveState(state);
+      renderPlanner();
+    }
+
+    function updateProgress() {
+      const state = loadState();
+      let totalChecked = 0;
+      let totalItems = 0;
+
+      DAYS_DATA.forEach(day => {
+        totalItems += day.todos.length;
+        const dayKey = `day${day.day}`;
+        const todosState = (state[dayKey] || {}).todos || {};
+        totalChecked += Object.values(todosState).filter(v => todoIsComplete(v)).length;
+      });
+
+      const pct = totalItems > 0 ? (totalChecked / totalItems) * 100 : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+
+      let starsHtml = '';
+      for (let i = 1; i <= 10; i++) {
+        const dayKey = `day${i}`;
+        const dayState = state[dayKey] || {};
+        const completed = dayState.completed || false;
+        starsHtml += `<span class="${completed ? 'completed' : ''}">${i}</span>`;
+      }
+      document.getElementById('progressStars').innerHTML = starsHtml;
+    }
+
+    renderPlanner();
+
+    // ═══════════ AUDIO PLAYER ═══════════
+    const audioElements = {};
+    const playSvg = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>';
+    const pauseSvg = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>';
+
+    function playAudio(id) {
+      const audio = document.getElementById('audio-' + id);
+      const btn = document.getElementById('playBtn' + id.replace('dhikr', ''));
+      if (!audio) return;
+
+      Object.keys(audioElements).forEach(key => {
+        if (key !== id) {
+          const other = document.getElementById('audio-' + key);
+          const otherBtn = document.getElementById('playBtn' + key.replace('dhikr', ''));
+          if (other && !other.paused) {
+            other.pause();
+            if (otherBtn) otherBtn.innerHTML = playSvg;
+          }
+        }
+      });
+
+      if (audio.paused) {
+        audio.play();
+        btn.innerHTML = pauseSvg;
+      } else {
+        audio.pause();
+        btn.innerHTML = playSvg;
+      }
+
+      audioElements[id] = true;
+
+      audio.onended = function() {
+        btn.innerHTML = playSvg;
+      };
+    }
+
+    // ═══════════ DHIKR COUNTER ═══════════
+    const COUNTER_KEY = 'dhulhijjah_counters_2026';
+
+    function todayStr() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    function loadCounters() {
+      try {
+        const saved = localStorage.getItem(COUNTER_KEY);
+        if (!saved) return { date: todayStr(), counts: {} };
+        const parsed = JSON.parse(saved);
+        if (parsed.date !== todayStr()) {
+          return { date: todayStr(), counts: {} };
+        }
+        return parsed;
+      } catch { return { date: todayStr(), counts: {} }; }
+    }
+
+    function saveCounters(data) {
+      data.date = todayStr();
+      try { localStorage.setItem(COUNTER_KEY, JSON.stringify(data)); } catch {}
+    }
+
+    function renderCounter(id) {
+      const data = loadCounters();
+      const count = data.counts[id] || 0;
+      const el = document.getElementById('count-' + id);
+      const bar = document.getElementById('progress-' + id);
+      const wrapper = document.getElementById('counter' + id.replace('dhikr', ''));
+      if (el) el.textContent = count;
+      if (bar) bar.style.width = Math.min(count, 100) + '%';
+      if (wrapper) {
+        if (count >= 100) {
+          wrapper.classList.add('counter-complete');
+        } else {
+          wrapper.classList.remove('counter-complete');
+        }
+      }
+    }
+
+    function updateCounter(id, delta) {
+      const data = loadCounters();
+      const current = data.counts[id] || 0;
+      const next = Math.max(0, current + delta);
+      data.counts[id] = next;
+      saveCounters(data);
+      renderCounter(id);
+
+      if (delta > 0) {
+        const btn = event.currentTarget;
+        btn.style.transform = 'scale(0.9)';
+        setTimeout(() => btn.style.transform = '', 100);
+      }
+    }
+
+    function resetCounter(id) {
+      const data = loadCounters();
+      data.counts[id] = 0;
+      saveCounters(data);
+      renderCounter(id);
+    }
+
+    // auto-reset at midnight if page stays open
+    function scheduleMiddnightReset() {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      const ms = midnight - now;
+      setTimeout(() => {
+        renderCounter('dhikr1');
+        renderCounter('dhikr2');
+        scheduleMiddnightReset();
+      }, ms);
+    }
+    scheduleMiddnightReset();
+
+    renderCounter('dhikr1');
+    renderCounter('dhikr2');
+
+    // ═══════════ DU'A LIST ═══════════
+    const DUA_KEY = 'dhulhijjah_duas_2026';
+    const REFLECT_KEY = 'dhulhijjah_reflections_2026';
+
+    function loadDuas() {
+      try {
+        const saved = localStorage.getItem(DUA_KEY);
+        return saved ? JSON.parse(saved) : ['', '', '', '', ''];
+      } catch { return ['', '', '', '', '']; }
+    }
+
+    function saveDuas() {
+      const inputs = document.querySelectorAll('.dua-input');
+      const duas = [];
+      inputs.forEach(inp => duas.push(inp.value));
+      try { localStorage.setItem(DUA_KEY, JSON.stringify(duas)); } catch {}
+      flashSaved('duaSaved');
+    }
+
+    function renderDuas() {
+      const duas = loadDuas();
+      const container = document.getElementById('duaList');
+      let html = '';
+      duas.forEach((text, i) => {
+        html += `<div class="dua-input-row">`;
+        html += `<div class="dua-num">${i + 1}</div>`;
+        html += `<textarea class="dua-input" rows="1" placeholder="Write your du'a here..." oninput="autoGrow(this); saveDuas()">${text}</textarea>`;
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+      document.querySelectorAll('.dua-input').forEach(el => autoGrow(el));
+    }
+
+    function addDua() {
+      const duas = loadDuas();
+      duas.push('');
+      try { localStorage.setItem(DUA_KEY, JSON.stringify(duas)); } catch {}
+      renderDuas();
+      const inputs = document.querySelectorAll('.dua-input');
+      if (inputs.length) inputs[inputs.length - 1].focus();
+    }
+
+    function autoGrow(el) {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    }
+
+    function flashSaved(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('show');
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => el.classList.remove('show'), 1500);
+    }
+
+    renderDuas();
+
+    // ═══════════ REFLECTIONS ═══════════
+    function loadReflections() {
+      try { return localStorage.getItem(REFLECT_KEY) || ''; } catch { return ''; }
+    }
+
+    function saveReflections() {
+      const text = document.getElementById('reflectionsText').value;
+      try { localStorage.setItem(REFLECT_KEY, text); } catch {}
+      flashSaved('reflectionsSaved');
+    }
+
+    document.getElementById('reflectionsText').value = loadReflections();
+  </script>
+</body>
+</html>
