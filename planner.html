@@ -495,6 +495,30 @@
       margin-top: 1px;
     }
 
+    @keyframes spin-ring {
+      to { transform: rotate(360deg); }
+    }
+
+    .play-btn.loading {
+      position: relative;
+      pointer-events: none;
+    }
+
+    .play-btn.loading svg {
+      opacity: 0.3;
+    }
+
+    .play-btn.loading::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2.5px solid transparent;
+      border-top-color: white;
+      border-right-color: white;
+      animation: spin-ring 0.7s linear infinite;
+    }
+
     /* ═══════════ DHIKR COUNTER ═══════════ */
     .dhikr-counter {
       margin-top: 16px;
@@ -1789,23 +1813,38 @@
           const otherBtn = document.getElementById('playBtn' + key.replace('dhikr', ''));
           if (other && !other.paused) {
             other.pause();
-            if (otherBtn) otherBtn.innerHTML = playSvg;
+            if (otherBtn) { otherBtn.innerHTML = playSvg; otherBtn.classList.remove('loading'); }
           }
         }
       });
 
       if (audio.paused) {
-        audio.play();
+        btn.classList.add('loading');
         btn.innerHTML = pauseSvg;
+        const playPromise = audio.play();
+        if (playPromise) {
+          playPromise.then(() => {
+            btn.classList.remove('loading');
+          }).catch(() => {
+            btn.classList.remove('loading');
+            btn.innerHTML = playSvg;
+          });
+        }
       } else {
         audio.pause();
         btn.innerHTML = playSvg;
+        btn.classList.remove('loading');
       }
 
       audioElements[id] = true;
 
+      audio.oncanplaythrough = function() {
+        btn.classList.remove('loading');
+      };
+
       audio.onended = function() {
         btn.innerHTML = playSvg;
+        btn.classList.remove('loading');
       };
     }
 
