@@ -739,6 +739,24 @@
         box-shadow: 0 6px 25px rgba(201,168,76,0.5);
       }
     }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 4mm 2mm; }
+      .page-wrapper { padding: 6mm 5mm; }
+      .cover { padding: 20mm 6mm 14mm; }
+      .cover .bismillah { font-size: 1.6rem; }
+      .cover h1 { font-size: 1.8rem; }
+      .cover-border { inset: 4mm; }
+      .cover-border::before { inset: 2mm; }
+      .reminders-grid { grid-template-columns: 1fr; }
+      .todo-list { columns: 1; }
+      .dhikr-arabic { font-size: 1.2rem; }
+      .counter-grid { grid-template-columns: repeat(10, 1fr); gap: 2.5mm; }
+      .counter-row-labels span { width: calc(100% / 5); }
+      .counter-row-labels { display: none; }
+      .rewards { grid-template-columns: 1fr; }
+      .day-card { padding: 3mm 4mm; }
+    }
   </style>
 </head>
 <body>
